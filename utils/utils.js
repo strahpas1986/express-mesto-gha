@@ -28,6 +28,6 @@ module.exports.errorsHandler = (err, res) => {
     });
   }
   return res.status(DEFAULT_CODE).send({
-    message: `Произошла неизвестная ошибка ${err.name}: ${err.message}`,
+    message: `На сервере произошла ошибка ${err.name}: ${err.message}`,
   });
 };
