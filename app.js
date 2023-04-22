@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const rootRouter = require('express').Router();
 const users = require('./routes/users');
 const cards = require('./routes/cards');
+const notFound = require('./routes/notFound');
 
 const { PORT = 3000 } = process.env;
 
@@ -12,6 +13,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb');
 
 rootRouter.use('/users', users);
 rootRouter.use('/cards', cards);
+rootRouter.use('*', notFound);
 
 app.use(express.json());
 
