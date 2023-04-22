@@ -2,7 +2,7 @@ const { errorsHandler } = require('../utils/utils');
 
 const { CREATE_CODE } = require('../utils/constants');
 
-const Card = require('../models/card');
+const Card = require('../models/cards');
 
 module.exports.getAllCards = (req, res) => {
   Card.find({})
