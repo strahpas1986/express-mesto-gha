@@ -3,13 +3,18 @@ const { celebrate, Joi } = require('celebrate');
 
 const {
   getAllUsers,
+  getUserInfo,
   getUser,
   createUser,
   updateUserInfo,
   updateUserAvatar,
 } = require('../controllers/users');
 
+const { LINK_REGEXP } = require('../utils/constants');
+
 router.get('/', getAllUsers);
+
+router.get('/me', getUserInfo);
 
 router.get('/:userId', celebrate({
   params: Joi.object().keys({
@@ -26,6 +31,10 @@ router.patch('/me', celebrate({
   }),
 }), updateUserInfo);
 
-router.patch('/me/avatar', updateUserAvatar);
+router.patch('/me/avatar', celebrate({
+  body: Joi.object().keys({
+    avatar: Joi.string().required().regex(LINK_REGEXP),
+  }),
+}), updateUserAvatar);
 
 module.exports = router;
