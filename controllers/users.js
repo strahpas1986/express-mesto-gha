@@ -13,11 +13,21 @@ module.exports.getAllUsers = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.getUser = (req, res, next) => {
-  User.findById(req.params.userId)
+const findUserById = (req, res, requiredData, next) => {
+  User.findById(requiredData)
     .orFail()
     .then((user) => res.send(user))
     .catch(next);
+};
+
+module.exports.getUser = (req, res, next) => {
+  const requiredData = req.params.userId;
+  findUserById(req, res, requiredData, next);
+};
+
+module.exports.getUserInfo = (req, res, next) => {
+  const requiredData = req.user._id;
+  findUserById(req, res, requiredData, next);
 };
 
 module.exports.createUser = (req, res, next) => {
