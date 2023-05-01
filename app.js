@@ -7,7 +7,7 @@ const validationErrors = require('celebrate').errors;
 const users = require('./routes/users');
 const cards = require('./routes/cards');
 const notFound = require('./routes/notFound');
-const auth = require('./middlewares/auth');
+// const auth = require('./middlewares/auth');
 
 const errors = require('./middlewares/error');
 
@@ -24,7 +24,7 @@ rootRouter.use('*', notFound);
 app.use(express.json());
 app.use(cookieParser());
 app.use(helmet());
-app.use(auth);
+// app.use(auth);
 
 app.use('/', rootRouter);
 app.use(validationErrors());
