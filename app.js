@@ -6,6 +6,8 @@ const helmet = require('helmet');
 const validationErrors = require('celebrate').errors;
 const users = require('./routes/users');
 const cards = require('./routes/cards');
+const signin = require('./routes/singin');
+const signup = require('./routes/singup');
 const notFound = require('./routes/notFound');
 // const auth = require('./middlewares/auth');
 
@@ -17,6 +19,8 @@ const app = express();
 
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
+rootRouter.use('/signin', signin);
+rootRouter.use('/signup', signup);
 rootRouter.use('/users', users);
 rootRouter.use('/cards', cards);
 rootRouter.use('*', notFound);

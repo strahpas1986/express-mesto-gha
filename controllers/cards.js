@@ -44,14 +44,14 @@ const cardLikesUpdate = (req, res, updateData, next) => {
     .catch(next);
 };
 
-module.exports.likeCard = (req, res) => {
+module.exports.likeCard = (req, res, next) => {
   const ownerId = req.user._id;
   const updateData = { $addToSet: { likes: ownerId } };
-  cardLikesUpdate(req, res, updateData);
+  cardLikesUpdate(req, res, updateData, next);
 };
 
-module.exports.dislikeCard = (req, res) => {
+module.exports.dislikeCard = (req, res, next) => {
   const ownerId = req.user._id;
   const updateData = { $pull: { likes: ownerId } };
-  cardLikesUpdate(req, res, updateData);
+  cardLikesUpdate(req, res, updateData, next);
 };
