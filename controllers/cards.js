@@ -20,7 +20,7 @@ module.exports.createCard = (req, res, next) => {
 };
 
 module.exports.deleteCard = (req, res, next) => {
-  Card.findByIdAndDelete(req.params.cardId)
+  Card.findById(req.params.cardId)
     .orFail()
     .then((card) => {
       Card.deleteOne({ _id: card._id, owner: req.user._id })

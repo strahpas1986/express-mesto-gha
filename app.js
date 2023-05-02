@@ -9,7 +9,7 @@ const cards = require('./routes/cards');
 const signin = require('./routes/singin');
 const signup = require('./routes/singup');
 const notFound = require('./routes/notFound');
-// const auth = require('./middlewares/auth');
+const auth = require('./middlewares/auth');
 
 const errors = require('./middlewares/error');
 
@@ -21,14 +21,13 @@ mongoose.connect('mongodb://localhost:27017/mestodb');
 
 rootRouter.use('/signin', signin);
 rootRouter.use('/signup', signup);
-rootRouter.use('/users', users);
-rootRouter.use('/cards', cards);
+rootRouter.use('/users', auth, users);
+rootRouter.use('/cards', auth, cards);
 rootRouter.use('*', notFound);
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(helmet());
-// app.use(auth);
 
 app.use('/', rootRouter);
 app.use(validationErrors());

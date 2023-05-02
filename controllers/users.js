@@ -55,8 +55,7 @@ module.exports.createUser = (req, res, next) => {
 };
 
 const userUpdate = (req, res, updateData, next) => {
-  const userId = req.user._id;
-  User.findByIdAndUpdate(userId, updateData, { new: true, runValidators: true })
+  User.findByIdAndUpdate(req.user._id, updateData, { new: true, runValidators: true })
     .orFail()
     .then((user) => res.send(user))
     .catch(next);
