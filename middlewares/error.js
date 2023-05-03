@@ -32,7 +32,7 @@ module.exports = ((err, req, res, next) => {
       message: `Передан некорректный ID: ${err.value}`,
     });
   }
-  if (err instanceof ErrorAutorization || ErrorForbidden || ErrorNotFound) {
+  if (err instanceof ErrorAutorization && ErrorForbidden && ErrorNotFound) {
     return res.status(err.statusCode).send({
       message: err.message,
     });
