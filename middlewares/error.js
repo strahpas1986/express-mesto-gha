@@ -32,22 +32,21 @@ module.exports = ((err, req, res, next) => {
       message: `Передан некорректный ID: ${err.value}`,
     });
   }
-  if (err instanceof ErrorAutorization) {
+  if (err instanceof ErrorAutorization instanceof ErrorForbidden instanceof ErrorNotFound) {
     return res.status(err.statusCode).send({
       message: err.message,
     });
   }
-
-  if (err instanceof ErrorForbidden) {
-    return res.status(err.statusCode).send({
-      message: err.message,
-    });
-  }
-  if (err instanceof ErrorNotFound) {
-    return res.status(err.statusCode).send({
-      message: err.message,
-    });
-  }
+  // if (err instanceof ErrorForbidden) {
+  //   return res.status(err.statusCode).send({
+  //     message: err.message,
+  //   });
+  // }
+  // if (err instanceof ErrorNotFound) {
+  //   return res.status(err.statusCode).send({
+  //     message: err.message,
+  //   });
+  // }
   if (err.code === 11000) {
     return res.status(CONFLICT_CODE).send({
       message: 'Указанный email уже зарегистрирован. Пожалуйста используйте другой email',
