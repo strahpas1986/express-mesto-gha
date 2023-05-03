@@ -8,21 +8,21 @@ const ErrorAuthorization = require('../errors/ErrorAutorization');
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'Поле "name" должно быть заполнено'],
+    required: true,
     minlength: [2, 'Минимальная длина поля "name" 2 символа'],
     maxlength: [30, 'Максимальная длина поля "name" 30 символов'],
     default: 'Жак-Ив Кусто',
   },
   about: {
     type: String,
-    required: [true, 'Поле "about" должно быть заполнено'],
+    required: true,
     minlength: [2, 'Минимальная длина поля "about" 2 символа'],
     maxlength: [30, 'Максимальная длина поля "about" 30 символов'],
     default: 'Исследователь',
   },
   avatar: {
     type: String,
-    required: [true, 'Поле "avatar" должно быть заполнено'],
+    required: true,
     validate: {
       validator: (v) => LINK_REGEXP.test(v),
       message: 'Неправильный формат ссылки',
