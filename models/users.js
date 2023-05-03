@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     unique: true,
-    required: [true, 'Поле "email" должно быть заполнено'],
+    required: true,
     validate: {
       validator: (v) => isEmail(v),
       message: 'Неправильный формат почты',
@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, 'Поле "password" должно быть заполнено'],
+    required: true,
     select: false,
   },
 }, {
