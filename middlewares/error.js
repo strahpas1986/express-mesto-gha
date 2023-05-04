@@ -4,9 +4,9 @@ const {
   CastError,
 } = require('mongoose').Error;
 
-const ErrorAutorization = require('../errors/ErrorAutorization');
-const ErrorForbidden = require('../errors/ErrorForbidden');
-const ErrorNotFound = require('../errors/ErrorNotFound');
+// const ErrorAutorization = require('../errors/ErrorAutorization');
+// const ErrorForbidden = require('../errors/ErrorForbidden');
+// const ErrorNotFound = require('../errors/ErrorNotFound');
 
 const {
   BAD_REQUEST_CODE,
@@ -32,12 +32,16 @@ module.exports = ((err, req, res, next) => {
       message: `Передан некорректный ID: ${err.value}`,
     });
   }
-  if (err instanceof ErrorAutorization || err instanceof ErrorForbidden || err instanceof ErrorNotFound) {
+  // if (err instanceof ErrorAutorization || err instanceof ErrorForbidden || err instanceof ErrorNotFound) {
+  //   return res.status(err.statusCode).send({
+  //     message: err.message,
+  //   });
+  // }
+  if (err.statusCode) {
     return res.status(err.statusCode).send({
       message: err.message,
     });
   }
-
   if (err.code === 11000) {
     return res.status(CONFLICT_CODE).send({
       message: 'Указанный email уже зарегистрирован. Пожалуйста используйте другой email',
